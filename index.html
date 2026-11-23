@@ -25,25 +25,25 @@
     overflow-x: hidden;
   }
 
-  /* 桜の花びら */
+  /* バラの花びら */
   .petals { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
   .petal {
     position: absolute;
     top: -4vh;
-    width: 13px; height: 11px;
-    background: #f8c8d8;
-    border-radius: 12px 1px 12px 1px;
+    width: 14px; height: 12px;
+    background: radial-gradient(ellipse at 30% 30%, #f093a8 0%, #dd5f7d 60%, #c7435f 100%);
+    border-radius: 80% 2px 80% 2px;
     opacity: 0;
     animation: fall linear infinite;
   }
-  .petal:nth-child(1)  { left: 6%;  animation-duration: 11s; animation-delay: 0s;   background:#f9cfdd; }
-  .petal:nth-child(2)  { left: 18%; animation-duration: 14s; animation-delay: 3s;   width:10px; height:9px; }
-  .petal:nth-child(3)  { left: 33%; animation-duration: 12s; animation-delay: 6.5s; background:#f6bcd2; }
-  .petal:nth-child(4)  { left: 47%; animation-duration: 15s; animation-delay: 1.5s; width:11px; height:10px; }
-  .petal:nth-child(5)  { left: 60%; animation-duration: 10.5s; animation-delay: 5s;  background:#fad9e5; }
-  .petal:nth-child(6)  { left: 72%; animation-duration: 13.5s; animation-delay: 8s;  width:10px; height:9px; }
-  .petal:nth-child(7)  { left: 84%; animation-duration: 12.5s; animation-delay: 2.5s; background:#f6c3d6; }
-  .petal:nth-child(8)  { left: 93%; animation-duration: 14.5s; animation-delay: 7s;  width:12px; height:10px; }
+  .petal:nth-child(1)  { left: 6%;  animation-duration: 11s; animation-delay: 0s; }
+  .petal:nth-child(2)  { left: 18%; animation-duration: 14s; animation-delay: 3s;   width:11px; height:10px; background: radial-gradient(ellipse at 30% 30%, #f5b3c1 0%, #e87e97 60%, #d65f7c 100%); }
+  .petal:nth-child(3)  { left: 33%; animation-duration: 12s; animation-delay: 6.5s; background: radial-gradient(ellipse at 30% 30%, #e87e97 0%, #cf4a67 60%, #b23350 100%); }
+  .petal:nth-child(4)  { left: 47%; animation-duration: 15s; animation-delay: 1.5s; width:12px; height:11px; }
+  .petal:nth-child(5)  { left: 60%; animation-duration: 10.5s; animation-delay: 5s;  background: radial-gradient(ellipse at 30% 30%, #f7c3cf 0%, #ef9db1 60%, #e07f98 100%); }
+  .petal:nth-child(6)  { left: 72%; animation-duration: 13.5s; animation-delay: 8s;  width:11px; height:10px; background: radial-gradient(ellipse at 30% 30%, #e87e97 0%, #cf4a67 60%, #b23350 100%); }
+  .petal:nth-child(7)  { left: 84%; animation-duration: 12.5s; animation-delay: 2.5s; }
+  .petal:nth-child(8)  { left: 93%; animation-duration: 14.5s; animation-delay: 7s;  width:13px; height:11px; background: radial-gradient(ellipse at 30% 30%, #f5b3c1 0%, #e87e97 60%, #d65f7c 100%); }
   @keyframes fall {
     0%   { transform: translate3d(0, -4vh, 0) rotate(0deg);   opacity: 0; }
     8%   { opacity: 0.85; }
