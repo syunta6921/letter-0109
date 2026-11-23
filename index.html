@@ -163,6 +163,15 @@
     margin-bottom: 34px;
     color: #5d443c;
   }
+  .date {
+    text-align: right;
+    font-size: 13.5px;
+    letter-spacing: 0.14em;
+    color: #a5837c;
+    margin: -18px 0 20px;
+    opacity: 0;
+  }
+  #letterCard.show .date { animation: fadeLine 0.9s ease 0.2s forwards; }
   .line {
     font-size: 16.5px;
     line-height: 2.2;
@@ -175,6 +184,9 @@
   #letterCard.show .line:nth-child(2) { animation-delay: 0.95s; }
   #letterCard.show .line:nth-child(3) { animation-delay: 1.55s; }
   #letterCard.show .line:nth-child(4) { animation-delay: 2.15s; }
+  #letterCard.show .line:nth-child(5) { animation-delay: 2.75s; }
+  #letterCard.show .line:nth-child(6) { animation-delay: 3.35s; }
+  #letterCard.show .line:nth-child(7) { animation-delay: 3.95s; }
   @keyframes fadeLine { to { opacity: 1; transform: translateY(0); } }
   .big {
     font-size: 21px;
@@ -189,7 +201,7 @@
     letter-spacing: 0.08em;
     opacity: 0;
   }
-  #letterCard.show .from { animation: fadeLine 0.9s ease 2.7s forwards; }
+  #letterCard.show .from { animation: fadeLine 0.9s ease 4.6s forwards; }
   .ornament {
     text-align: center;
     margin-top: 28px;
@@ -198,7 +210,7 @@
     letter-spacing: 0.5em;
     opacity: 0;
   }
-  #letterCard.show .ornament { animation: fadeLine 0.9s ease 3.1s forwards; }
+  #letterCard.show .ornament { animation: fadeLine 0.9s ease 5.0s forwards; }
 </style>
 </head>
 <body>
@@ -225,10 +237,14 @@
       <div class="tape"></div>
       <div class="for">For Hina</div>
       <h1>ひなちゃんへ</h1>
+      <div class="date">2026.11.23</div>
       <div>
         <p class="line">5ヶ月ありがとうね</p>
-        <p class="line">いっぱい嫌な思いさせてほんとにごめん</p>
-        <p class="line big">大好きです</p>
+        <p class="line">最近は話し合いが多くて嫌になることあるかもしれないけど、いつもちゃんと話し合ってくれてありがとう</p>
+        <p class="line">どんなときも相手してくれてうれしいです。</p>
+        <p class="line">ずっと一緒にいたいって心から思ってるから信じてね、</p>
+        <p class="line">ほんとにひなちゃんと付き合った良かった</p>
+        <p class="line big">だいすきだよ</p>
         <p class="line">感謝してます</p>
       </div>
       <div class="from">しゅんたより</div>
