@@ -4,141 +4,246 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ひなちゃんへ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
   body {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 24px 16px;
-    background: linear-gradient(160deg, #fdf6ec 0%, #fdeef2 55%, #f9e3ec 100%);
-    font-family: "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
-    color: #4a3f3a;
+    padding: 28px 18px;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 0%, #fff5f7 0%, transparent 60%),
+      radial-gradient(ellipse 70% 45% at 90% 100%, #ffeef4 0%, transparent 55%),
+      linear-gradient(165deg, #fdf3ee 0%, #fdeef1 50%, #fbe4ec 100%);
+    font-family: "Shippori Mincho B1", "Hiragino Mincho ProN", serif;
+    color: #503c36;
+    overflow-x: hidden;
   }
-  .card {
-    background: #fffdfa;
-    width: 100%;
-    max-width: 420px;
-    border-radius: 20px;
-    padding: 40px 30px 34px;
-    box-shadow: 0 12px 40px rgba(190, 130, 150, 0.22);
-    position: relative;
-    overflow: hidden;
-  }
-  /* 封筒カバー */
-  #cover {
+
+  /* 桜の花びら */
+  .petals { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
+  .petal {
     position: absolute;
-    inset: 0;
-    background: #fffdfa;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    cursor: pointer;
-    z-index: 10;
-    transition: opacity 0.9s ease;
-    -webkit-tap-highlight-color: transparent;
-  }
-  #cover.opened {
+    top: -4vh;
+    width: 13px; height: 11px;
+    background: #f8c8d8;
+    border-radius: 12px 1px 12px 1px;
     opacity: 0;
-    pointer-events: none;
+    animation: fall linear infinite;
   }
-  #cover .env { font-size: 64px; }
-  #cover .to {
-    font-size: 20px;
+  .petal:nth-child(1)  { left: 6%;  animation-duration: 11s; animation-delay: 0s;   background:#f9cfdd; }
+  .petal:nth-child(2)  { left: 18%; animation-duration: 14s; animation-delay: 3s;   width:10px; height:9px; }
+  .petal:nth-child(3)  { left: 33%; animation-duration: 12s; animation-delay: 6.5s; background:#f6bcd2; }
+  .petal:nth-child(4)  { left: 47%; animation-duration: 15s; animation-delay: 1.5s; width:11px; height:10px; }
+  .petal:nth-child(5)  { left: 60%; animation-duration: 10.5s; animation-delay: 5s;  background:#fad9e5; }
+  .petal:nth-child(6)  { left: 72%; animation-duration: 13.5s; animation-delay: 8s;  width:10px; height:9px; }
+  .petal:nth-child(7)  { left: 84%; animation-duration: 12.5s; animation-delay: 2.5s; background:#f6c3d6; }
+  .petal:nth-child(8)  { left: 93%; animation-duration: 14.5s; animation-delay: 7s;  width:12px; height:10px; }
+  @keyframes fall {
+    0%   { transform: translate3d(0, -4vh, 0) rotate(0deg);   opacity: 0; }
+    8%   { opacity: 0.85; }
+    50%  { transform: translate3d(4vw, 50vh, 0) rotate(190deg); }
+    92%  { opacity: 0.7; }
+    100% { transform: translate3d(-2vw, 106vh, 0) rotate(360deg); opacity: 0; }
+  }
+
+  .stage { position: relative; z-index: 2; width: 100%; max-width: 430px; }
+
+  /* ---------- 封筒 ---------- */
+  #envelope {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    text-align: center;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  #envelope.opened { opacity: 0; transform: translateY(14px) scale(0.97); pointer-events: none; }
+  .env-wrap { perspective: 900px; width: 300px; max-width: 82vw; margin: 0 auto; }
+  .env {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.55;
+    background: linear-gradient(160deg, #fff 0%, #fdf1f3 100%);
+    border-radius: 10px;
+    box-shadow: 0 18px 44px rgba(196, 120, 145, 0.30), inset 0 0 0 1px #f3dde2;
+  }
+  .env::before, .env::after {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: 10px;
+  }
+  .env::before {
+    background: linear-gradient(115deg, transparent 49.4%, #f6dde3 49.6%, transparent 50.4%),
+                linear-gradient(-115deg, transparent 49.4%, #f6dde3 49.6%, transparent 50.4%);
+  }
+  .flap {
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: 52%;
+    background: linear-gradient(180deg, #fdeef2 0%, #fadde6 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transition: transform 0.85s cubic-bezier(.6,.05,.3,1);
+    z-index: 3;
+    box-shadow: inset 0 -1px 0 #f0ccd7;
+  }
+  #envelope.opened .flap { transform: rotateX(178deg); }
+  .seal {
+    position: absolute;
+    left: 50%; top: 47%;
+    transform: translate(-50%, -50%);
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #e88aa0 0%, #d95f7e 55%, #c74a68 100%);
+    box-shadow: 0 5px 14px rgba(190, 80, 110, 0.45), inset 0 2px 5px rgba(255,255,255,0.5), inset 0 -3px 6px rgba(120,20,50,0.35);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-size: 24px;
+    z-index: 4;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  #envelope.opened .seal { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+  .env-to {
+    margin-top: 30px;
+    font-size: 21px;
+    letter-spacing: 0.14em;
+    color: #5d443c;
+  }
+  .env-tap {
+    margin-top: 12px;
+    font-size: 13px;
     letter-spacing: 0.1em;
-    color: #5a463f;
+    color: #b28a80;
+    animation: pulse 1.9s ease-in-out infinite;
   }
-  #cover .tap {
-    font-size: 13.5px;
-    color: #b08d84;
-    letter-spacing: 0.08em;
-    animation: pulse 1.8s ease-in-out infinite;
+  @keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+  /* ---------- 手紙 ---------- */
+  #letterCard {
+    display: none;
+    background:
+      repeating-linear-gradient(180deg, transparent 0 35px, rgba(214, 164, 175, 0.16) 35px 36px),
+      #fffdf8;
+    border-radius: 6px;
+    padding: 52px 34px 40px;
+    box-shadow: 0 20px 50px rgba(190, 125, 148, 0.28);
+    position: relative;
   }
-  @keyframes pulse {
-    0%, 100% { opacity: 0.45; }
-    50% { opacity: 1; }
+  #letterCard.show { display: block; animation: rise 1s cubic-bezier(.25,.7,.3,1) both; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(34px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .tape {
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%) rotate(-2.5deg);
+    width: 118px; height: 30px;
+    background: rgba(246, 198, 214, 0.75);
+    border-left: 1px dashed rgba(255,255,255,0.7);
+    border-right: 1px dashed rgba(255,255,255,0.7);
+    box-shadow: 0 2px 5px rgba(180,120,140,0.18);
+  }
+  .for {
+    font-family: "Great Vibes", cursive;
+    text-align: center;
+    font-size: 27px;
+    color: #cf7392;
+    margin-bottom: 4px;
   }
   h1 {
-    font-size: 21px;
+    font-size: 20px;
+    font-weight: 700;
     text-align: center;
-    letter-spacing: 0.08em;
-    margin-bottom: 28px;
-    color: #5a463f;
+    letter-spacing: 0.16em;
+    margin-bottom: 34px;
+    color: #5d443c;
   }
-  .heart {
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 14px;
-  }
-  .letter {
+  .line {
     font-size: 16.5px;
-    line-height: 2.1;
-    letter-spacing: 0.03em;
-    white-space: pre-line;
+    line-height: 2.2;
+    letter-spacing: 0.04em;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  #letterCard.show .line { animation: fadeLine 0.9s ease forwards; }
+  #letterCard.show .line:nth-child(1) { animation-delay: 0.35s; }
+  #letterCard.show .line:nth-child(2) { animation-delay: 0.95s; }
+  #letterCard.show .line:nth-child(3) { animation-delay: 1.55s; }
+  #letterCard.show .line:nth-child(4) { animation-delay: 2.15s; }
+  @keyframes fadeLine { to { opacity: 1; transform: translateY(0); } }
+  .big {
+    font-size: 21px;
+    font-weight: 700;
+    color: #c9506f;
+    letter-spacing: 0.1em;
   }
   .from {
-    margin-top: 30px;
+    margin-top: 34px;
     text-align: right;
     font-size: 16px;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    opacity: 0;
   }
-  .music {
-    margin-top: 36px;
+  #letterCard.show .from { animation: fadeLine 0.9s ease 2.7s forwards; }
+  .ornament {
     text-align: center;
+    margin-top: 28px;
+    color: #d98aa5;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    opacity: 0;
   }
-  .music .song {
-    font-size: 14px;
-    letter-spacing: 0.05em;
-    color: #8a6f66;
-    margin-bottom: 10px;
-  }
-  .music .player iframe {
-    width: 100%;
-    height: 150px;
-    border: 0;
-    border-radius: 12px;
-    overflow: hidden;
-    display: block;
-  }
-  .music .note {
-    margin-top: 10px;
-    font-size: 12px;
-    color: #a08b84;
-  }
+  #letterCard.show .ornament { animation: fadeLine 0.9s ease 3.1s forwards; }
 </style>
 </head>
 <body>
-  <div class="card">
-    <div id="cover">
-      <div class="env">💌</div>
-      <div class="to">ひなちゃんへ</div>
-      <div class="tap">タップして開く</div>
+  <div class="petals">
+    <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+    <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+  </div>
+
+  <div class="stage">
+    <!-- 封筒 -->
+    <div id="envelope">
+      <div class="env-wrap">
+        <div class="env">
+          <div class="flap"></div>
+          <div class="seal">♥</div>
+        </div>
+      </div>
+      <div class="env-to">ひなちゃんへ</div>
+      <div class="env-tap">タップして開く</div>
     </div>
 
-    <div class="heart">💌</div>
-    <h1>ひなちゃんへ</h1>
-    <div class="letter">5ヶ月ありがとうね
-いっぱい嫌な思いさせてほんとにごめん
-大好きです
-
-感謝してます</div>
-    <div class="from">しゅんたより</div>
-
-    <div class="music">
-      <div class="song">♪ 坂本龍一「Aqua」</div>
-      <div class="player">
-        <iframe allow="autoplay *; encrypted-media *; fullscreen *" src="https://embed.music.apple.com/jp/album/aqua/81902097?i=81902028" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"></iframe>
+    <!-- 手紙 -->
+    <div id="letterCard">
+      <div class="tape"></div>
+      <div class="for">For Hina</div>
+      <h1>ひなちゃんへ</h1>
+      <div>
+        <p class="line">5ヶ月ありがとうね</p>
+        <p class="line">いっぱい嫌な思いさせてほんとにごめん</p>
+        <p class="line big">大好きです</p>
+        <p class="line">感謝してます</p>
       </div>
-      <div class="note">♪の再生ボタンを押すと流れます</div>
+      <div class="from">しゅんたより</div>
+      <div class="ornament">♥ ♥ ♥</div>
     </div>
   </div>
 
   <script>
-    document.getElementById('cover').addEventListener('click', function () {
-      this.classList.add('opened');
+    document.getElementById('envelope').addEventListener('click', function () {
+      var env = this;
+      env.classList.add('opened');
+      setTimeout(function () {
+        env.style.display = 'none';
+        document.getElementById('letterCard').classList.add('show');
+      }, 800);
     });
   </script>
 </body>
