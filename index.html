@@ -25,6 +25,17 @@
     overflow-x: hidden;
   }
 
+  /* 背景写真 */
+  .bg {
+    position: fixed; inset: 0; z-index: 0;
+    background: url('bg.jpg') center / cover no-repeat;
+  }
+  .bg::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(165deg, rgba(253,243,238,0.60), rgba(253,238,241,0.52) 50%, rgba(251,228,236,0.64));
+  }
+
   /* バラの花びら */
   .petals { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
   .petal {
@@ -214,6 +225,7 @@
 </style>
 </head>
 <body>
+  <div class="bg"></div>
   <div class="petals">
     <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
     <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
